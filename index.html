@@ -821,7 +821,7 @@ const PROPERTIES = [
     subtitle: '7º andar · Oportunidade de Investimento',
     type: 'apartamento',
     purpose: 'venda',
-    price: 200000,
+    price: 185000,
     neighborhood: 'Maringá',
     city: 'PR',
     area: 23,
@@ -835,7 +835,7 @@ const PROPERTIES = [
     features: ['Academia equipada', 'Salão de festas', 'Lavanderia', '7º andar', 'Cozinha funcional', 'Banheiro completo'],
     investFeatures: ['Renda de R$ 1.100/mês', 'Já locado — renda imediata', 'Excelente liquidez'],
     description: 'Studio compacto, funcional e com excelente potencial de locação. O imóvel está atualmente locado por R$ 1.100/mês, proporcionando renda imediata ao comprador. Localizado no 7º andar do Edifício Bella Vita, com 23 m² privativos e condomínio com academia, salão de festas e lavanderia.',
-    photos: BELLA_VITA_PHOTOS,
+    photos: [BELLA_VITA_PHOTOS[30], ...BELLA_VITA_PHOTOS.slice(0,30), ...BELLA_VITA_PHOTOS.slice(31)],
     totalPhotos: 34,
   }
 ];
