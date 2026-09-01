@@ -801,7 +801,7 @@ const WPP = '5544998618134';
 
 /* ===== PROPERTY DATA ===== */
 // Photos: on deployed site use relative paths. In artifact preview, use __PHOTO_n__ placeholders replaced by build step.
-const BELLA_VITA_PHOTOS_DEPLOYED = Array.from({length:34},(_,i)=>`IMOVEIS/bella-vita/foto-${String(i+1).padStart(2,'0')}.jpg`);
+const BELLA_VITA_PHOTOS_DEPLOYED = Array.from({length:14},(_,i)=>`IMOVEIS/bella-vita/${i+1}.jpeg`);
 const BELLA_VITA_PHOTOS_EMBED = [
   'perfil-alisson.jpg',
   '__PLACEHOLDER__',
@@ -838,8 +838,8 @@ const PROPERTIES = [
     features: ['Academia equipada', 'Salão de festas', 'Lavanderia', '7º andar', 'Cozinha funcional', 'Banheiro completo'],
     investFeatures: ['Renda de R$ 1.100/mês', 'Já locado — renda imediata', 'Excelente liquidez'],
     description: 'Studio compacto, funcional e com excelente potencial de locação. O imóvel está atualmente locado por R$ 1.100/mês, proporcionando renda imediata ao comprador. Localizado no 7º andar do Edifício Bella Vita, com 23 m² privativos e condomínio com academia, salão de festas e lavanderia.',
-    photos: [BELLA_VITA_PHOTOS[30], ...BELLA_VITA_PHOTOS.slice(0,30), ...BELLA_VITA_PHOTOS.slice(31)],
-    totalPhotos: 34,
+    photos: BELLA_VITA_PHOTOS,
+    totalPhotos: 14,
   }
 ];
 
