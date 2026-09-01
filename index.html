@@ -233,10 +233,10 @@ input, select { font-family:var(--font-sans); }
 .modal-close:hover { background:var(--clr-border); }
 
 /* Gallery */
-.modal-gallery { position:relative; height:320px; background:#0B1D32; overflow:hidden; flex-shrink:0; }
+.modal-gallery { position:relative; height:380px; background:#0B1D32; overflow:hidden; flex-shrink:0; }
 .gallery-slides { display:flex; width:100%; height:100%; transition:transform 350ms ease; }
 .gallery-slide { width:100%; height:100%; flex-shrink:0; }
-.gallery-slide img { width:100%; height:100%; object-fit:cover; }
+.gallery-slide img { width:100%; height:100%; object-fit:contain; }
 .gallery-btn { position:absolute; top:50%; transform:translateY(-50%); z-index:5; width:40px; height:40px; border-radius:50%; background:rgba(0,0,0,.5); color:#fff; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); transition:background var(--transition); }
 .gallery-btn:hover { background:rgba(0,0,0,.75); }
 .gallery-btn.prev { left:.75rem; }
