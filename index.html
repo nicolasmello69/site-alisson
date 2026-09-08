@@ -473,8 +473,8 @@ input, select { font-family:var(--font-sans); }
 
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="hero-stat-num" id="heroCount">1</div>
-        <div class="hero-stat-label">Imóvel disponível</div>
+        <div class="hero-stat-num" id="heroCount">2</div>
+        <div class="hero-stat-label">Imóveis disponíveis</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-num">5+</div>
@@ -835,6 +835,28 @@ const BELLA_VITA_PHOTOS = hasEmbed
 const PERFIL_PHOTO = '__PLACEHOLDER__';
 const hasPerfil = PERFIL_PHOTO.startsWith('data:');
 
+const CASA_JB_PHOTOS = [
+  'IMOVEIS/casa-jardim-botanico/1 capa.jpeg',
+  'IMOVEIS/casa-jardim-botanico/2.jpeg',
+  'IMOVEIS/casa-jardim-botanico/3.jpeg',
+  'IMOVEIS/casa-jardim-botanico/4.jpeg',
+  'IMOVEIS/casa-jardim-botanico/5.jpeg',
+  'IMOVEIS/casa-jardim-botanico/6.jpeg',
+  'IMOVEIS/casa-jardim-botanico/7.jpeg',
+  'IMOVEIS/casa-jardim-botanico/8.jpeg',
+  'IMOVEIS/casa-jardim-botanico/9.jpeg',
+  'IMOVEIS/casa-jardim-botanico/10.jpeg',
+  'IMOVEIS/casa-jardim-botanico/11.jpeg',
+  'IMOVEIS/casa-jardim-botanico/12.jpeg',
+  'IMOVEIS/casa-jardim-botanico/13.jpeg',
+  'IMOVEIS/casa-jardim-botanico/14.jpeg',
+  'IMOVEIS/casa-jardim-botanico/15.jpeg',
+  'IMOVEIS/casa-jardim-botanico/16.jpeg',
+  'IMOVEIS/casa-jardim-botanico/17.jpeg',
+  'IMOVEIS/casa-jardim-botanico/18.jpeg',
+  'IMOVEIS/casa-jardim-botanico/19.jpeg',
+];
+
 const PROPERTIES = [
   {
     id: 1,
@@ -859,6 +881,30 @@ const PROPERTIES = [
     description: 'Studio compacto, funcional e com excelente potencial de locação. O imóvel está atualmente locado por R$ 1.100/mês, proporcionando renda imediata ao comprador. Localizado no 7º andar do Edifício Bella Vita, com 23 m² privativos e condomínio com academia, salão de festas e lavanderia.',
     photos: BELLA_VITA_PHOTOS,
     totalPhotos: 14,
+  },
+  {
+    id: 2,
+    title: 'Casa Jardim Botânico',
+    subtitle: '3 quartos · 2 vagas · 110 m²',
+    type: 'casa',
+    purpose: 'venda',
+    price: 545000,
+    neighborhood: 'Jardim Botânico',
+    city: 'PR',
+    area: 110,
+    bedrooms: 3,
+    bathrooms: 2,
+    parking: 2,
+    floor: null,
+    rentIncome: null,
+    isInvestment: false,
+    slug: 'jardim-botanico',
+    mapsUrl: 'https://maps.google.com/?q=Jardim+Bot%C3%A2nico+Maring%C3%A1+PR',
+    features: ['3 quartos (1 suíte)', 'Sala de estar ampla', 'Cozinha funcional', 'Lavanderia separada', 'Banheiro social', '2 vagas de garagem', '110 m² construídos', '150 m² de terreno'],
+    investFeatures: [],
+    description: 'Excelente oportunidade para quem busca conforto, praticidade e um ótimo custo-benefício! Casa com 110 m² de construção em terreno de 150 m², composta por 3 quartos sendo 1 suíte, sala de estar ampla, cozinha funcional, lavanderia separada, banheiro social e vaga para 2 veículos. Localizada no Jardim Botânico, em região tranquila e com fácil acesso aos principais serviços e comércios da cidade.',
+    photos: CASA_JB_PHOTOS,
+    totalPhotos: 19,
   }
 ];
 
