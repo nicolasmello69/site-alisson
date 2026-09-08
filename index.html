@@ -791,6 +791,10 @@ input, select { font-family:var(--font-sans); }
         </a>
       </div>
       <span class="modal-ref" id="modalRef"></span>
+      <button id="btnCopyLink" onclick="copyModalLink()" style="background:none;border:1px solid var(--clr-border);border-radius:var(--r-sm);padding:.35rem .75rem;font-size:.78rem;color:var(--clr-text-2);cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;margin-top:.5rem;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span id="copyLinkLabel">Copiar link do anúncio</span>
+      </button>
     </div>
   </div>
 </div>
@@ -834,6 +838,7 @@ const PROPERTIES = [
     floor: '7º',
     rentIncome: 1100,
     isInvestment: true,
+    slug: 'bella-vita',
     mapsUrl: 'https://maps.google.com/?q=Edif%C3%ADcio+Bella+Vita+Maring%C3%A1+PR',
     features: ['Academia equipada', 'Salão de festas', 'Lavanderia', '7º andar', 'Cozinha funcional', 'Banheiro completo'],
     investFeatures: ['Renda de R$ 1.100/mês', 'Já locado — renda imediata', 'Excelente liquidez'],
@@ -1083,6 +1088,7 @@ function openModal(id) {
   bd.classList.add('open');
   bd.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
+  if (p.slug) history.replaceState(null, '', '#imovel/' + p.slug);
 }
 
 function closeModal() {
@@ -1090,10 +1096,31 @@ function closeModal() {
   bd.classList.remove('open');
   bd.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
+  history.replaceState(null, '', window.location.pathname);
 }
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modalBackdrop').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+function copyModalLink() {
+  const url = window.location.href;
+  navigator.clipboard.writeText(url).then(() => {
+    const lbl = document.getElementById('copyLinkLabel');
+    lbl.textContent = 'Link copiado!';
+    setTimeout(() => { lbl.textContent = 'Copiar link do anúncio'; }, 2000);
+  });
+}
+
+// Auto-open modal from URL hash (e.g. #imovel/bella-vita)
+(function(){
+  const hash = window.location.hash;
+  const m = hash.match(/^#imovel\/(.+)$/);
+  if (m) {
+    const slug = m[1];
+    const p = PROPERTIES.find(x => x.slug === slug);
+    if (p) setTimeout(() => openModal(p.id), 300);
+  }
+})();
 
 /* ===== ABOUT PHOTO FALLBACK ===== */
 (function(){
