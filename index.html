@@ -1204,7 +1204,7 @@ function nativeShare() {
 }
 
 function copyModalLink() {
-  const url = window.location.href;
+  const url = _shareUrl || window.location.href;
   navigator.clipboard.writeText(url).then(() => {
     const lbl = document.getElementById('copyLinkLabel');
     lbl.textContent = 'Copiado!';
