@@ -1157,7 +1157,7 @@ function openModal(id) {
   bd.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
   if (p.slug) {
-    history.replaceState(null, '', '#imovel/' + p.slug);
+    history.replaceState(null, '', '/imovel/' + p.slug);
     setShareLinks(window.location.origin + '/imovel/' + p.slug, p.title);
   }
   document.getElementById('shareMenu').style.display = 'none';
@@ -1168,7 +1168,7 @@ function closeModal() {
   bd.classList.remove('open');
   bd.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
-  history.replaceState(null, '', window.location.pathname);
+  history.replaceState(null, '', '/');
 }
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modalBackdrop').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
