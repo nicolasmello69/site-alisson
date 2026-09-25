@@ -1050,7 +1050,7 @@ function initGallery(photos) {
   const dots = document.getElementById('galleryDots');
 
   slides.innerHTML = photos.map((src,i) =>
-    `<div class="gallery-slide"><img src="${src}" alt="Foto ${i+1}" loading="${i===0?'eager':'lazy'}"></div>`
+    `<div class="gallery-slide"><img src="${src}" alt="Foto ${i+1}" loading="eager"></div>`
   ).join('');
 
   // Show only first 8 dots
