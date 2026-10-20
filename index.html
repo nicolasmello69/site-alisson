@@ -860,7 +860,33 @@ const CASA_JB_PHOTOS = [
   'IMOVEIS/casa-jardim-botanico/20.jpeg',
 ];
 
+const GREENVILLE_PHOTOS = Array.from({length:74},(_,i)=>`IMOVEIS/apartamento-greenville/${i+1}.jpeg`);
+
 const PROPERTIES = [
+  {
+    id: 3,
+    title: 'Apartamento Green Ville',
+    subtitle: '4 suítes · 21º andar · 380 m²',
+    type: 'apartamento',
+    purpose: 'venda',
+    price: 2990000,
+    neighborhood: 'Zona 01',
+    city: 'PR',
+    area: 380,
+    bedrooms: 4,
+    bathrooms: 5,
+    parking: 2,
+    floor: '21º',
+    rentIncome: null,
+    isInvestment: false,
+    slug: 'apartamento-greenville',
+    mapsUrl: 'https://maps.google.com/?q=Pra%C3%A7a+Presidente+Kennedy+Zona+01+Maring%C3%A1+PR',
+    features: ['4 suítes completas', '5 banheiros', '2 vagas de garagem', '380 m² privativos', '21º andar', 'Elevador privativo', '1 apartamento por andar', 'Lareira', 'Bar integrado', 'Vista privilegiada da cidade', 'Condomínio R$ 3.500/mês'],
+    investFeatures: [],
+    description: 'Apartamento de alto padrão com 380 m² no 21º andar do Green Ville, na Praça Presidente Kennedy, coração da Zona 01 de Maringá. São 4 suítes completas, 5 banheiros, elevador privativo e apenas 1 unidade por andar — máxima privacidade. Acabamento refinado, lareira, bar integrado e uma das mais belas vistas da cidade. Para quem busca o melhor do mercado imobiliário de Maringá.',
+    photos: GREENVILLE_PHOTOS,
+    totalPhotos: 74,
+  },
   {
     id: 1,
     title: 'Studio Edifício Bella Vita',
