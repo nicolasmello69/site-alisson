@@ -862,7 +862,39 @@ const CASA_JB_PHOTOS = [
 
 const GREENVILLE_PHOTOS = Array.from({length:74},(_,i)=>`IMOVEIS/apartamento-greenville/${i+1}.jpeg`);
 
+const CASA_VO_PHOTOS = [
+  '1', '2', '3', '4-1', '5', '6', '7', '8', '9', '10',
+  '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+  '21', '22', '23', '24', '25-1', '26', '28', '29', '30', '31',
+  '32', '33', '34', '34-1', '35', '35-1', '35-2', '36', '37',
+  '38', '39', '40', '41', '42', '43'
+].map(name => `IMOVEIS/casa-vo/${name}.jpeg`);
+
 const PROPERTIES = [
+  {
+    id: 4,
+    title: 'CASA VO',
+    subtitle: '',
+    type: 'casa',
+    purpose: 'venda',
+    price: null,
+    neighborhood: 'Maringá',
+    city: 'PR',
+    area: null,
+    bedrooms: null,
+    bathrooms: null,
+    parking: null,
+    floor: null,
+    rentIncome: null,
+    isInvestment: false,
+    slug: 'casa-vo',
+    mapsUrl: '',
+    features: [],
+    investFeatures: [],
+    description: '',
+    photos: CASA_VO_PHOTOS,
+    totalPhotos: CASA_VO_PHOTOS.length,
+  },
   {
     id: 3,
     title: 'Apartamento Green Ville',
@@ -969,8 +1001,8 @@ const WPP_ICON = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentC
 function typeLabel(t) { return {casa:'Casa',apartamento:'Apartamento',comercial:'Comercial',terreno:'Terreno'}[t]||t; }
 
 function wppLink(p) {
-  const priceStr = p.purpose==='aluguel' ? `R$ ${p.price.toLocaleString('pt-BR')}/mês` : `R$ ${p.price.toLocaleString('pt-BR')}`;
-  const msg = encodeURIComponent(`Olá Alisson! Vi o anúncio do "${p.title}" em ${p.neighborhood}, ${p.city} por ${priceStr} no seu site. Gostaria de mais informações.`);
+  const priceStr = p.price == null ? '' : ` por R$ ${p.price.toLocaleString('pt-BR')}${p.purpose==='aluguel' ? '/mês' : ''}`;
+  const msg = encodeURIComponent(`Olá Alisson! Vi o anúncio do "${p.title}" em ${p.neighborhood}, ${p.city}${priceStr} no seu site. Gostaria de mais informações.`);
   return `https://wa.me/${WPP}?text=${msg}`;
 }
 
@@ -985,7 +1017,7 @@ function filterProperties() {
       const q = searchState.location.toLowerCase();
       if (!p.neighborhood.toLowerCase().includes(q) && !p.city.toLowerCase().includes(q) && !p.title.toLowerCase().includes(q)) return false;
     }
-    if (searchState.maxPrice && p.price > parseInt(searchState.maxPrice)) return false;
+    if (searchState.maxPrice && (p.price == null || p.price > parseInt(searchState.maxPrice))) return false;
     if (searchState.bedrooms && p.bedrooms < parseInt(searchState.bedrooms)) return false;
     return true;
   });
@@ -1008,7 +1040,7 @@ function renderCards() {
     html = props.map(p => {
       const purposeLabel = p.purpose==='aluguel' ? 'Aluguel' : 'Venda';
       const purposeClass = p.purpose==='aluguel' ? 'badge-rent' : 'badge-sale';
-      const priceFormatted = `R$ ${p.price.toLocaleString('pt-BR')}`;
+      const priceFormatted = p.price == null ? '' : `R$ ${p.price.toLocaleString('pt-BR')}`;
       const firstPhoto = p.photos && p.photos[0];
       const hasRealPhoto = firstPhoto && (firstPhoto.startsWith('data:') || firstPhoto.endsWith('.jpg') || firstPhoto.endsWith('.jpeg'));
       return `
@@ -1031,15 +1063,15 @@ function renderCards() {
           </div>
         </div>
         <div class="prop-body">
-          <div class="prop-price">${priceFormatted}</div>
+          ${priceFormatted ? `<div class="prop-price">${priceFormatted}</div>` : ''}
           ${p.rentIncome ? `<div class="prop-price-sub"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>Já locado: R$ ${p.rentIncome.toLocaleString('pt-BR')}/mês</div>` : ''}
           <div class="prop-title">${p.title}</div>
           <div class="prop-location">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            ${p.neighborhood}, ${p.city} · ${p.floor ? p.floor+' andar' : ''}
+            ${p.neighborhood}, ${p.city}${p.floor ? ' · '+p.floor+' andar' : ''}
           </div>
           <div class="prop-specs">
-            <span class="prop-spec"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>${p.area} m²</span>
+            ${p.area ? `<span class="prop-spec"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>${p.area} m²</span>` : ''}
             ${p.bedrooms ? `<span class="prop-spec"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v13M3 13h18M21 13v7M7 13V9a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4"/></svg>${p.bedrooms} quarto${p.bedrooms!==1?'s':''}</span>` : ''}
             ${p.bathrooms ? `<span class="prop-spec"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16v4a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-4z"/><path d="M6 12V5a2 2 0 0 1 2-2h3v6"/></svg>${p.bathrooms} banheiro${p.bathrooms!==1?'s':''}</span>` : ''}
           </div>
@@ -1135,7 +1167,8 @@ function openModal(id) {
   document.getElementById('modalBadge').textContent = p.purpose==='aluguel' ? 'Aluguel' : 'Venda';
   document.getElementById('modalBadge').className = `badge ${p.purpose==='aluguel'?'badge-rent':'badge-sale'}`;
   document.getElementById('modalType').textContent = typeLabel(p.type);
-  document.getElementById('modalPrice').textContent = `R$ ${p.price.toLocaleString('pt-BR')}`;
+  document.getElementById('modalPrice').textContent = p.price == null ? '' : `R$ ${p.price.toLocaleString('pt-BR')}`;
+  document.getElementById('modalPrice').hidden = p.price == null;
   document.getElementById('modalTitle').textContent = p.title;
   document.getElementById('modalLocation').textContent = `${p.neighborhood}, ${p.city}${p.floor?' · '+p.floor+' andar':''}`;
   document.getElementById('modalRef').textContent = `REF-${String(p.id).padStart(4,'0')} · ${p.totalPhotos||0} fotos`;
